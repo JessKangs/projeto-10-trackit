@@ -11,7 +11,7 @@ export default function Footer () {
         <>
 
         <Bottom>
-            <h1> Hábitos </h1>
+            <Habitos> Hábitos </Habitos>
             <CircularProgressbar value={value}
         text={`${percentage}`}
         background
@@ -29,18 +29,26 @@ export default function Footer () {
 }
 
 const Bottom = styled.div`
-    width: 90%;
+    width: 100%;
     height: 70px;
     background-color: #FFFFFF;
     position: fixed;
     bottom: 0;
     display:flex;
     align-items: center;
-    padding: 0 36px;
 
     h1 {
         color: #52B6FF;
         font-family: 'Lexend Deca', sans-serif;
         font-size: 18px;
+        margin-right: 28px;
     }
+`
+
+const Habitos = styled.div`
+
+    color: #52B6FF;
+    font-family: 'Lexend Deca', sans-serif;
+    font-size: 18px;
+    margin-left: 28px;
 `

@@ -1,10 +1,13 @@
 import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import weekDays from './WeekDays';
+import trash from '../../assets/img/trash.svg'
+import EraseHabit from '../Habitos/EraseHabit';
 
 export default function ListarHabitos ( { token } ) {
     const [list, setList] = useState("")
-    const [color, setColor] = useState(false);
+    const [color, setColor] = useState("inicio");
 
         const config = {
             headers: {
@@ -12,44 +15,63 @@ export default function ListarHabitos ( { token } ) {
             }
         }
    
-            useEffect(() => {
+        
+        function listar () {
+             //useEffect(() => {
                 const resquest =  axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits', config);
     
                 resquest.then(resposta => {
                    console.log(resposta.data)
-                   setList(resposta.data)
+                   console.log(resposta.data.days)
+
+                  setList (
+                    resposta.data.map( (habitInfo, index) => 
+                        
+
+                <CardHabitoSalvo key={index}>
+
+                      <Header>
+                      <h2>{habitInfo.name}</h2>
+                      <img src={trash} onClick={EraseHabit}/>
+                      </Header>
+                                
+                     <Semana>
+                    
+                        {resposta.data.map((days, index) => 
+                            <DiaSemana color={color} key={index} >
+                            <h2>{days.days[index]}</h2>
+                             </DiaSemana>)}
+                     </Semana>
+
+                 </CardHabitoSalvo>
+                              )
+                  )
+                
                    //navigate("/")
                })
    
                resquest.catch(console.log("deu ruim listar"))    
    
-                }, []);    
+             //   }, []);    
+        }
+        
 
-                //  {list.days.map((day) => {
-                //      const jaSelecionado = day.some(dia => dia === day.days)
 
-                //      if (jaSelecionado) setColor(true)
+            //      {list.days.map((day) => {
+            //           const jaSelecionado = day.some(dia => dia === day.days)
+
+            //           if (jaSelecionado) setColor(true)
                     
-                //      console.log(jaSelecionado) 
+            //           console.log(jaSelecionado) 
                     
-                //      return "deu bom"
-                //  })}   
+            //           return "deu bom"
+            //   })}   
         console.log(list)
 
+const [lista, setLista] = useState(listar)
     return (
         <Background>
-            <CardHabitoSalvo>
-            
-            {list.map( habitDay => 
-                    <>
-                    <h2>habitDay</h2>
-                    <DiaSemana color={color} >
-                    <h2>{habitDay[0]}</h2>
-                    </DiaSemana> 
-                    </>
-                )}
-
-            </CardHabitoSalvo>
+            {list}
         </Background>
     )
 
@@ -63,6 +85,10 @@ const CardHabitoSalvo = styled.div`
     border-radius: 5px;
     background-color: #FFFFFF;
     margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    box-sizing: border-box;
 
     h1 {
        margin-left: 15px;
@@ -87,8 +113,30 @@ const DiaSemana = styled.div`
             color: ${(color) => color ? "white" : "#DBDBDB"}
         }
 `
+
+const Semana = styled.div`
+        display:flex;
+        align-items: center;
+        width: 250px;
+        justify-content: space-between;
+        margin-top: 8px;
+`
+
 const Background = styled.div`
     background-color: #E5E5E5;
     height: 750px;
     overflow-y: hidden;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+`
+const Header = styled.div`
+    width: 315px;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    img {
+        height: 15px;
+    }
 `

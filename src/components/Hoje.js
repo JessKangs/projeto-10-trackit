@@ -18,7 +18,7 @@ export default function Hoje ( { token, img } ) {
             <DiaHoje>Bom dia</DiaHoje>
                 <ListarHabitos token={token} />
             <Footer />
-        </Main>
+        </Main> 
         </Background>
     )
 

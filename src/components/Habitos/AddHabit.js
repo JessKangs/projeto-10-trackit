@@ -2,27 +2,13 @@ import { useNavigate } from "react-router-dom";
 import { useState } from 'react';
 import styled from 'styled-components';
 import axios from "axios";
+import weekDays from "../Content Fixed/WeekDays";
 
 export default function AddHabit ( { token } ) {
     const [nomeHabito, setNomeHabito] = useState("");
     //const [whichDay, setWhichDay] = useState([]);
     const navigate = useNavigate();
 console.log(token)
-    const weekDays = [
-        {diaSemana: "D",
-            id: 1},
-        {diaSemana: "S",
-            id: 2},
-        {diaSemana: "T",
-            id: 3},
-        {diaSemana: "Q",
-            id: 4}, 
-        {diaSemana: "Q",
-            id: 5}, 
-        {diaSemana: "S",
-            id: 6}, 
-        {diaSemana: "S",
-            id: 7}]
 
     const selecionados = []; 
 
