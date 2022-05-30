@@ -1,34 +1,45 @@
-import { useState, useEffect } from 'react';
-import { Link } from "react-router-dom";
+import { useState } from 'react';
+import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
 import styled from 'styled-components';
 
 
 import logo from "../../assets/img/logo-pag-inicial.svg"
 
+//raposinha https://i.pinimg.com/550x/62/ee/e0/62eee08d28589f947b6b4a67808f42d3.jpg
+
 export default function Cadastro () {
     const [email, setEmail] = useState("");
-    const [senha, setSenha] = useState("");
-    const [nome, setNome] = useState("");
-    const [foto, setFoto] = useState("");
-
+    const [password, setPassword] = useState("");
+    const [name, setName] = useState("");
+    const [image, setImage] = useState("");
+    
+    const navigate = useNavigate();
 
     function cadastrar (event) {
          event.preventDefault();
 
-         const data = {
-            email,
-            senha,
-            nome,
-            foto
+         const info = {
+            email: email,
+            name: name,
+            image: image,
+            password: password
         }
          
-             const request =  axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up`, data);
+            //useEffect(() => {
+             const request =  axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up', info);
     
-            
+             request.then(resposta => {
+                console.log(resposta.data)
+                navigate("/")
+            })
+
+            request.catch(console.log("deu ruim cadastro"))    
+
+             //}, []);
 
     
-    console.log(data) 
+    //console.log(info) 
     }
    
 
@@ -41,11 +52,11 @@ export default function Cadastro () {
 
                 <input onChange={(e) => setEmail(e.target.value)} value={email} type="email" placeholder="email" required />
 
-                <input onChange={(e) => setSenha(e.target.value)} value={senha} type="password" placeholder="senha"  required />
+                <input onChange={(e) => setPassword(e.target.value)} value={password} type="password" placeholder="senha"  required />
 
-                <input onChange={(e) => setNome(e.target.value)} value={nome} type="text" placeholder="nome" required />
+                <input onChange={(e) => setName(e.target.value)} value={name} type="text" placeholder="nome" required />
 
-                <input onChange={(e) => setFoto(e.target.value)} value={foto} type="url" placeholder="foto" required />
+                <input onChange={(e) => setImage(e.target.value)} value={image} type="url" placeholder="foto" required />
 
                 <Link to="/habitos"><button type="submit" onClick={cadastrar}> Cadastrar </button></Link>
 

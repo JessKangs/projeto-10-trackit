@@ -29,7 +29,7 @@ export default function Footer () {
 }
 
 const Bottom = styled.div`
-    width: 100%;
+    width: 90%;
     height: 70px;
     background-color: #FFFFFF;
     position: fixed;

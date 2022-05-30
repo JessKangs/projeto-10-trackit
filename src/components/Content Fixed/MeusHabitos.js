@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import AddHabit from '../Habitos/AddHabit';
 
-export default function MeusHabitos () {
+export default function MeusHabitos ( {token}) {
 
     const [addHabit, setAddHabit] = useState(false);
   
@@ -18,7 +18,7 @@ export default function MeusHabitos () {
             <button onClick={setTrue}>+</button>
            </Content>
 
-           {addHabit ? <AddHabit /> : null}
+           {addHabit ? <AddHabit token={token} /> : null}
            
            </>
     )

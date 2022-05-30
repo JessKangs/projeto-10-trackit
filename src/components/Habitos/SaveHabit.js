@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import dayjs from 'dayjs';
 
 export default function SaveHabit () {
-    let habitosSalvos = [];
 
     return (
         <>
@@ -22,6 +21,3 @@ const Card = styled.div`
     background-color: white;
     border-radius: 5px;
 `
-
-const bolinha = require('dayjs')
-// dayjs().format()
